@@ -1,109 +1,106 @@
-<html>
-
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-
-  <!-- Import Vue.js and axios -->
-  <script src="https://unpkg.com/vue"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-</head>
-
-<body>
-
-  <div id="app" class="ui container">
-    <h1>GitHub Profiles</h1>
-    <div class="ui link cards">
-      <github-user-card 
-        v-for="user in users" 
-        :username="user">
-      </github-user-card>
-    </div>
-  </div>
-
-  <!-- begin github-user-card component -->
-  <template id="github-user-card-template">
-    <div class="ui card">
-      <a :href="`https://github.com/${username}`" class="image">
-        <img :src="user.avatar_url">
-      </a>
-      <div class="content">
-        <a class="header" :href="`https://github.com/${username}`">{{ user.name }}</a>
-        <div class="meta">
-          <span class="date">Joined in {{ githubYear }}</span>
-        </div>
-        <div class="description">
-          Bio: {{ user.bio }}
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github User Profile Component - Antonella Garcia</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app" class="ui container">
+      <h1>GitHub Profiles</h1>
+      <div class="ui link cards">
+        <github-user-card v-for="user in users" :username="user">
+        </github-user-card>
       </div>
-      <div class="extra content">
-        <a :href="`https://github.com/${username}?tab=followers`">
-          <i class="user icon"></i>
-          {{ user.followers }} Followers
+    </div>
+
+    <!-- begin github-user-card component -->
+    <template id="github-user-card-template">
+      <div class="ui card">
+        <a :href="`https://github.com/${username}`" class="image">
+          <img :src="user.avatar_url" />
         </a>
+        <div class="content">
+          <a class="header" :href="`https://github.com/${username}`"
+            >{{ user.name }}</a
+          >
+          <div class="meta">
+            <span class="date">Joined in {{ githubYear }}</span>
+          </div>
+          <div class="description">Bio: {{ user.bio }}</div>
+        </div>
+        <div class="extra content">
+          <a :href="`https://github.com/${username}?tab=followers`">
+            <i class="user icon"></i>
+            {{ user.followers }} Followers
+          </a>
+        </div>
       </div>
-    </div>
-  </template>
+    </template>
 
-  <script>
-    Vue.component('github-user-card', {
-      template: '#github-user-card-template',
-      props: {
-        username: {
-          type: String,
-          required: true
-        }
-      },
-      computed: {
-        githubYear() {
-          let githubDate = this.user.created_at
-          console.log(githubDate)
-          if (!githubDate) return "";
-          return githubDate.replace(/^(\d+).*/, "$1")
-        }
-      },
-      data() {
-        return {
-          user: {}
-        }
-      },
-      created() {
-        axios(
-          {
+    <script>
+      Vue.component("github-user-card", {
+        template: "#github-user-card-template",
+        props: {
+          username: {
+            type: String,
+            required: true,
+          },
+        },
+        computed: {
+          githubYear() {
+            let githubDate = this.user.created_at;
+            console.log(githubDate);
+            if (!githubDate) return "";
+            return githubDate.replace(/^(\d+).*/, "$1");
+          },
+        },
+        data() {
+          return {
+            user: {},
+          };
+        },
+        created() {
+          axios({
             url: `https://api.github.com/users/${this.username}`,
-            method: "GET"
-          })
-          .then(response => {
+            method: "GET",
+          }).then((response) => {
             console.log(response);
-            this.user = response.data
-          })
+            this.user = response.data;
+          });
+        },
+      });
+    </script>
+    <!-- end github-user-card component -->
 
-      }
-    })
-  </script>
-  <!-- end github-user-card component -->
-
-  <script>
-    new Vue({
-      el: '#app',
-      data: {
-        users: [
-          "crguezl", "casiano",
-          "alu0101102726",
-          "Pmolmar",
-          "PaulaExposito",
-          "alu0101228587",
-          "alu0101227610",
-          "alu0101232812",
-          "lauramanzini",
-          "TeresaUll" ,
-          "ddialar", "alu0100898293",
-          "mstoisor",
-          ]
-
-      }
-    })
-  </script>
-</body>
-
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          users: [
+            "alu0101227610",
+            "crguezl",
+            "FabioBianchiniCano",
+            "pablo-pg",
+            "HelenaGD",
+            "alu0101337975",
+            "Daniel-del-Castillo",
+            "GGCristo",
+            "lochdeve",
+            "alu0101228587",
+            "lauramanzini",
+            "alu0101232812",
+            "JorNiebla"
+          ],
+        },
+      });
+    </script>
+  </body>
 </html>
