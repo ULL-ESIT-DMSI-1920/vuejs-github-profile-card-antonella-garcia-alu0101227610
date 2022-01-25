@@ -1,5 +1,7 @@
 # Lab: GitHub Profile Card
 
+Page visible at: https://ull-esit-dmsi-1920.github.io/vuejs-github-profile-card-antonella-garcia-alu0101227610/
+
 ## TODO 
 
 ### VueSchool Course Vue.js Components Fundamentals
